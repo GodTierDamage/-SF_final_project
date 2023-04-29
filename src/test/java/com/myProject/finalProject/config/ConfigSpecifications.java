@@ -1,4 +1,4 @@
-package com.myProject.finalProject;
+package com.myProject.finalProject.config;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;

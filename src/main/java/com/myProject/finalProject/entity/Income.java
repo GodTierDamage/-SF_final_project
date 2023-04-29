@@ -1,11 +1,13 @@
 package com.myProject.finalProject.entity;
 
+import com.myProject.finalProject.enums.OperationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.glassfish.grizzly.http.util.TimeStamp;
 
 import java.math.BigDecimal;
 
@@ -27,4 +29,12 @@ public class Income {
 
     @Column
     private BigDecimal income;
+
+    @Column
+    @Enumerated(EnumType.ORDINAL)
+    @Builder.Default
+    private final OperationType operationType = OperationType.INCOME;
+
+    @Column
+    private TimeStamp dateOfOperation;
 }

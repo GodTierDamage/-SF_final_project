@@ -1,4 +1,7 @@
 package com.myProject.finalProject.repository;
 
-public interface SpendRepository {
+import com.myProject.finalProject.entity.Spend;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SpendRepository extends JpaRepository<Spend, Long> {
 }

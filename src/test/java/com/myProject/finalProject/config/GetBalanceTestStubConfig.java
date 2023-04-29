@@ -1,4 +1,4 @@
-package com.myProject.finalProject.controller;
+package com.myProject.finalProject.config;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.myProject.finalProject.entity.Balance;
@@ -19,10 +19,10 @@ public class GetBalanceTestStubConfig {
                 .willReturn(aResponse().
                         withHeader("Content-Type", "application/json")
                         .withStatus(200)
-                        .withBody(objectMapper.writeValueAsString(initializeTestBalance()))));
+                        .withBody(objectMapper.writeValueAsString(getBalance()))));
     }
 
-    private static Balance initializeTestBalance() {
+    private static Balance getBalance() {
         return Balance.
                 builder().
                 id(1L).

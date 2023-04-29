@@ -1,10 +1,8 @@
 package com.myProject.finalProject.exception;
 
-import java.util.function.Supplier;
+public class BalanceNotFoundException extends Exception{
 
-public class NotFoundException extends Exception{
-
-    public NotFoundException(String message) {
-        super(message);
+    public BalanceNotFoundException(long id) {
+        super("Balance with id " + id + " doesn't exist");
     }
 }
