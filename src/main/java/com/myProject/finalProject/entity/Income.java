@@ -1,40 +1,23 @@
 package com.myProject.finalProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.myProject.finalProject.enums.OperationType;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-import org.glassfish.grizzly.http.util.TimeStamp;
+import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
-
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Entity
-@Accessors(chain = true)
-@Table(name = "INCOME")
-public class Income {
+@Table(name = "INCOME_BALANCE_TRANSACTION")
+@SuperBuilder(toBuilder = true)
+@AllArgsConstructor
+@PrimaryKeyJoinColumn(name = "transaction_id")
+@JsonTypeName(value = "INCOME")
+public class Income extends Transaction{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column
-    private Long balanceId;
-
-    @Column
-    private BigDecimal income;
-
-    @Column
-    @Enumerated(EnumType.ORDINAL)
-    @Builder.Default
-    private final OperationType operationType = OperationType.INCOME;
-
-    @Column
-    private TimeStamp dateOfOperation;
+    @Override
+    public OperationType operationType() {
+        return OperationType.INCOME;
+    }
 }

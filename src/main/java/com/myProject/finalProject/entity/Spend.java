@@ -1,40 +1,51 @@
 package com.myProject.finalProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.myProject.finalProject.enums.OperationType;
+import com.myProject.finalProject.enums.SpendingType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-import org.glassfish.grizzly.http.util.TimeStamp;
+import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
-
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Entity
-@Accessors(chain = true)
-@Table(name = "SPEND")
-public class Spend {
+@Table(name = "SPEND_BALANCE_TRANSACTION")
+@SuperBuilder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@PrimaryKeyJoinColumn(name = "transaction_id")
+@JsonTypeName(value = "SPEND")
+public class Spend extends Transaction{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "type_of_spending_operation")
+    @Enumerated(EnumType.STRING)
+    @JsonProperty("typeOfSpendingOperation")
+    private SpendingType typeOfSpendingOperation;
 
-    @Column
-    private Long balanceId;
+    @Column(name = "receiver_id")
+    private Long receiverId;
 
-    @Column
-    private BigDecimal spend;
+    @Override
+    public OperationType operationType() {
+        return OperationType.SPEND;
+    }
 
-    @Column
-    @Enumerated(EnumType.ORDINAL)
-    @Builder.Default
-    private final OperationType operationType = OperationType.SPEND;
+    public SpendingType typeOfSpendingOperation() {
+        return typeOfSpendingOperation;
+    }
 
-    @Column
-    private TimeStamp dateOfOperation;
+    public Spend typeOfSpendingOperation(SpendingType typeOfSpendingOperation) {
+        this.typeOfSpendingOperation = typeOfSpendingOperation;
+        return this;
+    }
+
+    public Long receiverId() {
+        return receiverId;
+    }
+
+    public Spend receiverId(Long receiverId) {
+        this.receiverId = receiverId;
+        return this;
+    }
 }

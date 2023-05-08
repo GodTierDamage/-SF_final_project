@@ -31,14 +31,14 @@ public class PutMoneyTestStubConfig {
         return Income.builder()
                 .id(1L)
                 .balanceId(1L)
-                .income(BigDecimal.valueOf(500))
+                .amount(BigDecimal.valueOf(500))
                 .build();
     }
 
     private static Balance getBalance() {
         return Balance.builder()
                 .id(1L)
-                .balance(BigDecimal.valueOf(1000))
+                .amount(BigDecimal.valueOf(1000))
                 .build();
     }
 }

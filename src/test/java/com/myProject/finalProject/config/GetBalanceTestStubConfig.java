@@ -3,6 +3,8 @@ package com.myProject.finalProject.config;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.myProject.finalProject.entity.Balance;
 import lombok.SneakyThrows;
+import org.junit.jupiter.api.Test;
+import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
@@ -15,7 +17,8 @@ public class GetBalanceTestStubConfig {
     public static void setupStub(WireMockServer wireMockServer) {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        wireMockServer.stubFor(get(urlEqualTo("/api/test/endpoint?id=1"))
+        wireMockServer.stubFor(get(urlMatching("/api/test/endpoint\\?balanceId=\\d+"))
+                        .withQueryParam("balanceId", equalTo("1"))
                 .willReturn(aResponse().
                         withHeader("Content-Type", "application/json")
                         .withStatus(200)
@@ -26,7 +29,7 @@ public class GetBalanceTestStubConfig {
         return Balance.
                 builder().
                 id(1L).
-                balance(BigDecimal.valueOf(0)).
+                amount(BigDecimal.valueOf(0)).
                 build();
     }
 }

@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:13.2-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bankDB
+    ports:
+      - '5432:5432'
+
+  api:
+    build: .
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://172.18.0.2:5432/bankDB
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    command: ["./mvnw", "test"]
