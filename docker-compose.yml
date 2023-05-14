@@ -10,11 +10,10 @@ services:
       - '5432:5432'
 
   api:
-    build: .
+    image: final-project
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://172.18.0.2:5432/bankDB
     ports:
       - "8080:8080"
     depends_on:
       - db
-    command: ["./mvnw", "test"]
