@@ -17,6 +17,9 @@ spring:
     baseline-on-migrate: true
     user: postgres
     password: postgres
+  sql:
+    init:
+      mode: always
 
 server:
   error:

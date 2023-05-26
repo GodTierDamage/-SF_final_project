@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FinalProjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FinalProjectApplication.class, args);
+		createSpringApplication().run(args);
+	}
+
+	public static SpringApplication createSpringApplication() {
+		return new SpringApplication(FinalProjectApplication.class);
 	}
 }
